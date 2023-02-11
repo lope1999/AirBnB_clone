@@ -1,58 +1,57 @@
 #!/usr/bin/python3
-"""
-This module contains code related to file storage
-for the airbnb clone project. A json data format
-for serialization and deserialization of data.
-"""
+''' FileStorage module '''
 import json
+from models.base_model import BaseModel
 import models
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class FileStorage:
-    """
-    This class serializes instances to a JSON file and
-    deserializes JSON file to instances
-    """
-    __file_path = "file.json"
+    '''FileStorage class'''
+
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-        """
-        Public instance method to return
+        '''
+        Return:
         the dictionary __objects
-        """
-        return (self.__objects)
+        '''
+        return self.__objects
 
     def new(self, obj):
-        """
-        Public instance method that
-        sets in __objects with key id
-        """
-        if obj:
-            self.__objects["{}.{}".format(str(type(obj).__name__),
-                                          obj.id)] = obj
+        '''
+        sets in objects with key classname.id
+        Args:
+        object
+        '''
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
     def save(self):
-        """
-        Public instance that serializes __objects
-        to the JSON file
-        """
-        dic = {}
-        for id, objs in self.__objects.items():
-            dic[id] = objs.to_dict()
-        with open(self.__file_path, mode="w", encoding="UTF-8") as myfile:
-            json.dump(dic, myfile)
+        '''
+        serializes __objects to JSON file
+        '''
+        newdict = {}
+        with open(self.__file_path, mode='w+', encoding='utf-8') as f:
+            for k, v in self.__objects.items():
+                newdict[k] = v.to_dict()
+            json.dump(newdict, f)
 
     def reload(self):
-        """
-        Public instance method to deserialize the JSON file
-        to __objects only if file exists
-        """
+        '''
+        deserializes the JSON file
+        '''
         try:
-            with open(self.__file_path, encoding="UTF-8") as myfile:
-                obj = json.load(myfile)
-            for key, value in obj.items():
-                name = models.allclasses[value["__class__"]](**value)
-                self.__objects[key] = name
-        except FileNotFoundError:
+            with open(self.__file_path, mode='r', encoding='utf-8') as f:
+                newobjects = json.load(f)
+                for k, v in newobjects.items():
+                    reloadedobj = eval('{}(**v)'.format(v['__class__']))
+                    self.__objects[k] = reloadedobj
+
+        except IOError:
             pass
