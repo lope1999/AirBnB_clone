@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         ''' quit interpreter '''
-        sys.exit(1)
+        return True
 
     def emptyline(self):
         ''' do nothing with empty line '''
