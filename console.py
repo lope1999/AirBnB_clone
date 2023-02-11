@@ -170,17 +170,16 @@ class HBNBCommand(cmd.Cmd):
             print('** value missing **')
             return False
 
-            if updatevalue.isdecimal() is True:
-                setattr(clschange, attributename, int(updatevalue))
+        if updatevalue.isdecimal() is True:
+            setattr(clschange, attributename, int(updatevalue))
+            storage.save()
+        else:
+            try:
+                setattr(clschange, attributename, float(updatevalue))
                 storage.save()
-            else:
-
-                try:
-                    setattr(clschange, attributename, float(updatevalue))
-                    storage.save()
-                except:
-                    setattr(clschange, attributename, updatevalue)
-                    storage.save()
+            except:
+                setattr(clschange, attributename, str(updatevalue))
+                storage.save()
 
     def help_update(self):
         '''help update'''
