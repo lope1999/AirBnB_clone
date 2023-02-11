@@ -6,6 +6,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 import json
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,6 +14,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     myclasses = ["BaseModel", "User"]
+
     def do_EOF(self, line):
         ''' exit the program '''
         return True
@@ -92,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
                 if i == "{}.{}".format(args[0], args[1]):
                     all_objs.pop(i)
                     storage.save()
-                    return True
+                    return False
             print('** no instance found **')
 
     def help_destroy(self):
@@ -103,23 +105,20 @@ class HBNBCommand(cmd.Cmd):
         ''' prints all string representations of instances'''
         args = line.split()
         all_objs = storage.all()
-        flag = 0
 
+        if line not in self.myclasses:
+            print('** class doesn\'t exist **')
+            return False
         if len(args) == 0:
             for i in all_objs:
                 strarg = str(all_objs[i])
                 print(strarg)
-                flag = 1
-
         elif len(args) > 0:
             for i in all_objs:
                 if i.startswith(args[0]):
                     strarg = str(all_objs[i])
                     print(strarg)
-                    flag = 1
-            if flag == 0:
-                print('** class doesn\'t exist **')
-                return False
+        return False
 
     def help_all(self):
         ''' help all'''
