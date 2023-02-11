@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_show(self):
         ''' help show '''
-        print("Show command to show the classes\n")
+        print("Show command to display the classes\n")
 
     def do_destroy(self, line):
         ''' deletes an instance based on the class id'''
@@ -167,12 +167,16 @@ class HBNBCommand(cmd.Cmd):
             print('** value missing **')
             return False
 
-        try:
-            setattr(clschange, attributename, float(updatevalue))
-            storage.save()
-        except:
-            setattr(clschange, attributename, str(updatevalue))
-            storage.save()
+            if updatevalue.isdecimal() is True:
+                setattr(clschange, attributename, float(updatevalue))
+                storage.save()
+            else:
+                try:
+                    setattr(clschange, attributename, float(updatevalue))
+                    storage.save()
+                except:
+                    setattr(clschange, attributename, str(updatevalue))
+                    storage.save()
 
     def help_update(self):
         '''help update'''
