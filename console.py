@@ -7,13 +7,18 @@ from models.engine.file_storage import FileStorage
 from models import storage
 import json
 from models.user import User
-
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     ''' HBNB class contains entry point '''
 
     prompt = '(hbnb) '
-    myclasses = ["BaseModel", "User"]
+    myclasses = ["BaseModel", "User", "Place", "State", "Amenity", "Review",\
+                 "City"]
 
     def do_EOF(self, line):
         ''' exit the program '''
