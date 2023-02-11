@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     ''' HBNB class contains entry point '''
 
     prompt = '(hbnb) '
-
+    myclasses = ["BaseModel", "User"]
     def do_EOF(self, line):
         ''' exit the program '''
         return True
@@ -33,13 +33,13 @@ class HBNBCommand(cmd.Cmd):
         ''' create a new instance of '''
         if len(classname) == 0:
             print('** class name missing **')
-        else:
-            try:
-                new = eval("{}()".format(classname))
-                new.save()
-                print(new.id)
-            except:
+        elif classname not in self.myclasses:
                 print('** class doesn\'t exist **')
+                return False
+        else:
+            new = eval("{}()".format(classname))
+            new.save()
+            print(new.id)
 
     def help_create(self):
         ''' help create '''
@@ -51,12 +51,10 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print('** class name missing **')
             return False
-        else:
-            try:
-                eval("{}()".format(args[0]))
-            except:
-                print('** class doesn\'t exist **')
-                return False
+        elif args[0] not in self.myclasses:
+            print('** class doesn\'t exist **')
+            return False
+
         if len(args) < 2:
             print('** instance id missing **')
             return False
@@ -65,12 +63,12 @@ class HBNBCommand(cmd.Cmd):
         for i in all_objs.keys():
             if i == "{}.{}".format(args[0], args[1]):
                 print(all_objs[i])
-                return
+                return False
         print('** no instance found **')
 
     def help_show(self):
         ''' help show '''
-        print("Show command to display the classes\n")
+        print("Show command to display the string representation of class\n")
 
     def do_destroy(self, line):
         ''' deletes an instance based on the class id'''
@@ -78,26 +76,24 @@ class HBNBCommand(cmd.Cmd):
         if len(line) == 0:
             print('** class name missing **')
             return False
-        else:
-            try:
-                eval("{}()".format(args[0]))
-            except:
-                print('** class doesn\'t exist ** ')
-        if len(args) < 2:
+        elif args[0] not in self.myclasses:
+            print('** class doesn\'t exist ** ')
+            return False
+        elif len(args) < 2:
             print('** instance id missing **')
             return False
-
-        all_objs = storage.all()
-        for i in all_objs:
-            if i == "{}.{}".format(args[0], args[1]):
-                all_objs.pop(i)
-                storage.save()
-                return
-        print('** no instance found **')
+        else:
+            all_objs = storage.all()
+            for i in all_objs:
+                if i == "{}.{}".format(args[0], args[1]):
+                    all_objs.pop(i)
+                    storage.save()
+                    return True
+            print('** no instance found **')
 
     def help_destroy(self):
         ''' help destroy '''
-        print("Destroy command to destroy a class\n")
+        print("Destroy command to destroy an object\n")
 
     def do_all(self, line):
         ''' prints all string representations of instances'''
@@ -165,18 +161,18 @@ class HBNBCommand(cmd.Cmd):
         except:
             print('** value missing **')
             return False
-            '''
+
             if updatevalue.isdecimal() is True:
                 setattr(clschange, attributename, int(updatevalue))
                 storage.save()
             else:
-            '''
-            try:
-                setattr(clschange, attributename, float(updatevalue))
-                storage.save()
-            except:
-                setattr(clschange, attributename, updatevalue)
-                storage.save()
+
+                try:
+                    setattr(clschange, attributename, float(updatevalue))
+                    storage.save()
+                except:
+                    setattr(clschange, attributename, updatevalue)
+                    storage.save()
 
     def help_update(self):
         '''help update'''
