@@ -50,6 +50,7 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         if len(args) == 0:
             print('** class name missing **')
+            return False
         else:
             try:
                 eval("{}()".format(args[0]))
@@ -102,25 +103,23 @@ class HBNBCommand(cmd.Cmd):
         ''' prints all string representations of instances'''
         args = line.split()
         all_objs = storage.all()
-        final = []
+        flag = 0
 
         if len(args) == 0:
             for i in all_objs:
                 strarg = str(all_objs[i])
-                final.append(strarg)
-            if final != []:
-                print(final)
+                print(strarg)
+                flag = 1
 
         elif len(args) > 0:
             for i in all_objs:
                 if i.startswith(args[0]):
                     strarg = str(all_objs[i])
-                    final.append(strarg)
-            if final == []:
+                    print(strarg)
+                    flag = 1
+            if flag == 0:
                 print('** class doesn\'t exist **')
                 return False
-            else:
-                print(final)
 
     def help_all(self):
         ''' help all'''
