@@ -168,14 +168,14 @@ class HBNBCommand(cmd.Cmd):
             return False
 
             if updatevalue.isdecimal() is True:
-                setattr(clschange, attributename, float(updatevalue))
+                setattr(clschange, attributename, int(updatevalue))
                 storage.save()
             else:
                 try:
                     setattr(clschange, attributename, float(updatevalue))
                     storage.save()
                 except:
-                    setattr(clschange, attributename, str(updatevalue))
+                    setattr(clschange, attributename, updatevalue)
                     storage.save()
 
     def help_update(self):
