@@ -106,14 +106,14 @@ class HBNBCommand(cmd.Cmd):
         args = line.split()
         all_objs = storage.all()
 
-        if line not in self.myclasses:
-            print('** class doesn\'t exist **')
-            return False
         if len(args) == 0:
             for i in all_objs:
                 strarg = str(all_objs[i])
                 print(strarg)
-        elif len(args) > 0:
+        elif line not in self.myclasses:
+            print('** class doesn\'t exist **')
+            return False
+        else:
             for i in all_objs:
                 if i.startswith(args[0]):
                     strarg = str(all_objs[i])
