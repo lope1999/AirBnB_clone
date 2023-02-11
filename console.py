@@ -13,11 +13,12 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     ''' HBNB class contains entry point '''
 
     prompt = '(hbnb) '
-    myclasses = ["BaseModel", "User", "Place", "State", "Amenity", "Review",\
+    myclasses = ["BaseModel", "User", "Place", "State", "Amenity", "Review",
                  "City"]
 
     def do_EOF(self, line):
@@ -26,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         ''' help EOF'''
-        print ("EOF command to exit the program\n")
+        print("EOF command to exit the program\n")
 
     def help_quit(self):
         ''' help quit '''
@@ -141,32 +142,32 @@ class HBNBCommand(cmd.Cmd):
         try:
             clsname = line.split()[0]
             eval("{}()".format(clsname))
-        except:
+        except IndexError:
             print('** class doesn\'t exist **')
             return False
 
         try:
             instanceid = line.split()[1]
-        except:
+        except IndexError:
             print('** instance id missing **')
             return False
 
         all_objs = storage.all()
         try:
             clschange = all_objs["{}.{}".format(clsname, instanceid)]
-        except:
+        except IndexError:
             print('** no instance found **')
             return False
 
         try:
             attributename = line.split()[2]
-        except:
+        except IndexError:
             print('** attribute name missing **')
             return False
 
         try:
             updatevalue = line.split()[3]
-        except:
+        except IndexError:
             print('** value missing **')
             return False
 
@@ -177,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 setattr(clschange, attributename, float(updatevalue))
                 storage.save()
-            except:
+            except IndexError:
                 setattr(clschange, attributename, str(updatevalue))
                 storage.save()
 
