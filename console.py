@@ -176,7 +176,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_update(self):
         '''help update'''
-        print("update command to update attributes")
+        print("update command to update attributes\n")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
