@@ -3,6 +3,13 @@
 import json
 from models.base_model import BaseModel
 import models
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+
 
 class FileStorage:
     '''FileStorage class'''
@@ -42,9 +49,9 @@ class FileStorage:
         try:
             with open(self.__file_path, mode='r', encoding='utf-8') as f:
                 newobjects = json.load(f)
-                for k,v in newobjects.items():
+                for k, v in newobjects.items():
                     reloadedobj = eval('{}(**v)'.format(v['__class__']))
                     self.__objects[k] = reloadedobj
 
-        except:
+        except IOError:
             pass
