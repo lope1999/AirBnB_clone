@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return False
         elif args[0] not in self.myclasses:
-            print('** class doesn\'t exist ** ')
+            print('** class doesn\'t exist **')
             return False
         elif len(args) < 2:
             print('** instance id missing **')
@@ -178,7 +178,7 @@ class HBNBCommand(cmd.Cmd):
             try:
                 setattr(clschange, attributename, float(updatevalue))
                 storage.save()
-            except IndexError:
+            except:
                 setattr(clschange, attributename, str(updatevalue))
                 storage.save()
 
