@@ -1,7 +1,28 @@
+<<<<<<< HEAD
 body{
+=======
+<<<<<<< HEAD
+body{margin: 0;
+	padding: 0;
+	color: #484848;
+	font-size: 14px;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.footer_text{position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+=======
+body {
+>>>>>>> d3524e73cd337cac0bb520c936c7d4bab883c9fe
     margin: 0;
     padding: 0;
     color: #484848;
     font-size: 14px;
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+<<<<<<< HEAD
+=======
+>>>>>>> 426b7df6d1dd60eb050b933a5fa481c4193d8c93
+>>>>>>> d3524e73cd337cac0bb520c936c7d4bab883c9fe
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 footer {
     background-color: white;
     height:60px;
@@ -10,3 +11,27 @@ footer {
 p {
     text-align:center;
     line-height:30px;
+=======
+<<<<<<< HEAD
+footer{background-color:#ffffff; 
+	height: 60px;
+	width: 100%;
+	border-top: 1px solid #CCCCCC;
+	position: fixed;
+	bottom: 0px;
+=======
+footer {
+    background-color: white;
+    text-align: center;
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    border-top: 1px solid #CCCCCC;
+    bottom: 0;
+}
+
+footer>p {
+    margin-top: 23px;
+>>>>>>> 426b7df6d1dd60eb050b933a5fa481c4193d8c93
+}
+>>>>>>> d3524e73cd337cac0bb520c936c7d4bab883c9fe

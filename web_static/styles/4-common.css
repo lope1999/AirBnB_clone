@@ -1,4 +1,28 @@
+<<<<<<< HEAD
 body{
+=======
+body {
+<<<<<<< HEAD
+	margin: 0px;
+	padding: 0px;
+	color: #484848;
+	font-size: 14px;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.centered_footer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.container {
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+=======
+>>>>>>> d3524e73cd337cac0bb520c936c7d4bab883c9fe
     margin: 0;
     padding: 0;
     color: #484848;
@@ -6,7 +30,14 @@ body{
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+<<<<<<< HEAD
 body .container{
     max-width: 1000px;
     margin: 30px auto;
+=======
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+>>>>>>> 426b7df6d1dd60eb050b933a5fa481c4193d8c93
+>>>>>>> d3524e73cd337cac0bb520c936c7d4bab883c9fe
 }
